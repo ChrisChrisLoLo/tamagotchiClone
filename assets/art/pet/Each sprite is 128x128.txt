@@ -1,0 +1,1 @@
+Sprite is 128x128 scaled up from 32x32
