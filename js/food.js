@@ -27,7 +27,7 @@ foodArray = [
 
 var food = {
 	preload: function(){
-		this.load.spritesheet("foodSheet","assets/art/items/foodSheet.png",128,128,9);
+		
 	},
 	create: function(){
 		drawGameBody();
