@@ -32,14 +32,7 @@ function globalVal(){
 //---------------------------STATES---------------------------------------
 var main = {
 	preload: function(){
-		//loads an image can can be refenced as background
-		this.load.image("background","assets/art/background.png");
-		//loads a sprite sheet and breaks the sheet up into 10, 128 x 128 sprites.
-		this.load.spritesheet("petSheet","assets/art/pet/petSheet.png",128,128,10);
-		//loads button sprite sheet.
-		this.load.spritesheet("buttonSheet","assets/art/buttonSheet.png",64,64,15);
-		//loads a bitmapFont, which requires both a png as well as an XML file.
-		this.load.bitmapFont("pixel","assets/font/pixelFont.png","assets/font/pixelFont.xml");
+		
 		
 	},
 	create: function(){
@@ -78,16 +71,37 @@ var main = {
 	}
 }
 
+//State loads all most game assests. While this technically isnt needed as all states can preload
+//the files are small enough that this preload will be very quick, and will prevent the game from
+//flickering when states change.
+var preload = {
+	preload: function(){
+		//loads an image can can be refenced as background
+		this.load.image("background","assets/art/background.png");
+		//loads a sprite sheet and breaks the sheet up into 10, 128 x 128 sprites.
+		this.load.spritesheet("petSheet","assets/art/pet/petSheet.png",128,128,10);
+		//loads button sprite sheet.
+		this.load.spritesheet("buttonSheet","assets/art/buttonSheet.png",64,64,15);
+		this.load.spritesheet("foodSheet","assets/art/items/foodSheet.png",128,128,9);
+		//loads a bitmapFont, which requires both a png as well as an XML file.
+		this.load.bitmapFont("pixel","assets/font/pixelFont.png","assets/font/pixelFont.xml");
+		
+	},
+	create: function(){
+		game.state.start("main");
+	}
+}
+
 var stats = {
 	preload: function(){	
 	},
 	create: function(){
 		drawGameBody();
-		var contents = "Name: " + pet.name + "\nAge:  "+ pet.age+"\nHealth:  "+pet.health + "\nHunger:  "+ pet.hunger+ "\nHappiness: "+pet.happiness;
-		printText(contents);
 	},
 	update: function(){
-		tickCheck();	
+		tickCheck();
+		var contents = "Name: " + pet.name + "\nAge:  "+ pet.age+"\nHealth:  "+pet.health + "\nHunger:  "+ pet.hunger+ "\nHappiness: "+pet.happiness+ "\nMoney: $"+globalVal.money;
+		printText(contents);
 	}
 }
 
@@ -104,6 +118,17 @@ var fastForward = {
 	}
 }
 
+var toilet = {
+	preload: function(){
+	},
+	create: function(){
+		drawGameBody();
+		pet.poop = 0;
+		game.state.start("main");
+	},
+	update: function(){
+	}
+}
 
 
 //---------------------------SUBSTATE FUNCTIONS---------------------------------------
@@ -234,9 +259,11 @@ function tick(){
 	
 }
 
-
+game.state.add("preload",preload);
 game.state.add("main",main);
 game.state.add("stats",stats);
 game.state.add("fastForward",fastForward);
 game.state.add("food",food);
-game.state.start("main");
+game.state.add("toilet",toilet);
+game.state.start("preload");
+//game.state.start("main");
