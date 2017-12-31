@@ -4,21 +4,34 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 	this.spriteIndex = spriteIndex;
 	this.cost = cost;
 	this.hungRestore = hungRestore;
-	this.select = function() {
-		if (this.cost>globalVal.money){
-			
-			console.log("INSUFFICIENT FUNDS");
-			//TODO, have text in the screen be displayed for x amount of time
-			return;
+	this.select = function(mode) {
+		console.log(mode);
+		switch(mode){
+			//purchasing from the store puts a foodItem instance into an inventory
+			case "buy": 
+				if (this.cost>globalVal.money){
+					addTempText("INSUFFICIENT FUNDS",1);
+					console.log("INSUFFICIENT FUNDS");
+					return;
+				}
+				globalVal.money = globalVal.money-this.cost;
+				console.log("push");
+				invFoodArray.push(this);
+				game.state.start("main");
+			break;
+			//Consumes an item
+			case "use":
+				pet.hunger = pet.hunger+this.hungRestore;
+				invFoodArray.splice(invFoodArray.indexOf(this), 1 );
+			break;
 		}
-		pet.hunger = pet.hunger+this.hungRestore;
-		globalVal.money = globalVal.money-this.cost;
 		game.state.start("main");
 	}
 }
 //
-foodArray = [
+invFoodArray = [
 	new foodItem("Burger",0,10,"Fast food\nCosts $10",8),
+	/*
 	new foodItem("Steak",1,20,"Cow flesh.\nCosts $20",18),
 	new foodItem("Creamsicle",2,5,"I hate creamsicles\nCosts $5",3),
 	new foodItem("Fish",3,20,"85% Mercury free!\nCosts $20",20),
@@ -27,6 +40,7 @@ foodArray = [
 	new foodItem("Drumstick",6,20,"Bird flesh\nCosts $20",20),
 	new foodItem("Shoe",7,150,"You pay for the design\nCosts $150",2),
 	new foodItem("Chicken",8,20,"Fresh chicken\nCosts $20",20)
+	*/
 ];
 
 
@@ -36,10 +50,17 @@ var food = {
 		
 	},
 	create: function(){
+		//if (!invFoodArray){}
 		drawGameBody();
-		//drawGameMenu();
-		drawGameUI(foodArray,"foodSheet");
+		drawGameUI(invFoodArray,"foodSheet");
+		button12.mode="use";
 		
+		if(!invFoodArray.length){
+		button12.alpha = 0;
+		button11.alpha = 0;
+		button10.alpha = 0;
+		sprite.alpha = 0;
+		}
 		/*
 		//draw food sprite
 		foodSprite = game.add.sprite(this.game.world.centerX,this.game.world.centerY,"foodSheet");
@@ -54,7 +75,12 @@ var food = {
 		*/
 	},
 	update: function(){
-		displaySlide(foodArray);
+		if (!invFoodArray.length){
+
+		}
+		else{
+			displaySlide(invFoodArray);
+		}
 		tickCheck();	
 	}
 }

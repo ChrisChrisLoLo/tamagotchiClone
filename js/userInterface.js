@@ -18,13 +18,28 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 Object must have mainText,descText,spriteIndex properties and should have a select() method.
 */
 
-//TODO: have a menu that allows you to select and scroll from more than one array.
-function drawGameMenu(){
-	button13 = game.add.button(width*(5/6) ,height*(2/6),"buttonSheet",changeSlide,this,10,10,10);
+//have a menu that allows you to select and scroll from two arrays.
+//Inputs 4 strings, and will switch to a given state and display a given string
+//Intended to be used in conjunction with drawGameUI)()
+function drawGameMenu(state1,desc1,state2,desc2){
+	button13 = game.add.button(width*(4/6) ,height*(2/6),"buttonSheet",gameMenuSelect,this,10,10,10);
 	button13.anchor.set(0.5);
-	button14 = game.add.button(width*(5/6) ,height*(4/6),"buttonSheet",changeSlide,this,10,10,10);
-	button14.anchor.set(0.5);
+	button13.desc = desc1;
+	button13.state = state1;
 	
+	button14 = game.add.button(width*(4/6) ,height*(4/6),"buttonSheet",gameMenuSelect,this,10,10,10);
+	button14.anchor.set(0.5);
+	button14.desc = desc2;
+	button14.state = state2;
+	
+	var text1 = game.add.bitmapText(width*(2/6), height*(2/6),"pixel",desc1,32);
+	text1.anchor.set(0.5);
+	var text2 = game.add.bitmapText(width*(2/6), height*(4/6),"pixel",desc2,32);
+	text2.anchor.set(0.5);
+}
+
+function gameMenuSelect(button){
+	game.state.start(button.state);
 }
 
 slideCounter = 0;
@@ -48,10 +63,11 @@ function drawGameUI(array,spriteSheet){
 	sprite = game.add.sprite(this.game.world.centerX,this.game.world.centerY,spriteSheet);
 	sprite.frame = 0;
 	sprite.anchor.setTo(0.5);
-	mainText = game.add.bitmapText(game.world.centerX, height*(1/4),"pixel","ERROR",32);
+	mainText = game.add.bitmapText(game.world.centerX, height*(1/4),"pixel","Empty!",32);
 	mainText.anchor.setTo(0.5);
-	descText = game.add.bitmapText(game.world.centerX, height*(4/6),"pixel","ERROR",22);
+	descText = game.add.bitmapText(game.world.centerX, height*(4/6),"pixel","You're out of food!",22);
 	descText.anchor.setTo(0.5);
+	descText.align = "center";
 	descText.align = "center";
 }
 
@@ -67,7 +83,7 @@ function changeSlide(button){
 			slideCounter++;
 			break;
 		case "select":
-			button.variable[slideCounter].select();
+			button.variable[slideCounter].select(button.mode);
 			break;
 	}
 }
@@ -82,10 +98,17 @@ function displaySlide(array){
 	//console.log(array[slideCounter].mainText);
 	//console.log(slideCounter);
 	//console.log(array[slideCounter].descText);
-	if (slideCounter == 0){
+	//
+	if ((slideCounter == 0) && (array.length == 1)){
 		button10.alpha = 0;
+		button11.alpha = 0;
+	}
+	else if (slideCounter == 0){
+		button10.alpha = 0;
+		button11.alpha = 1;
 	}
 	else if (slideCounter == (array.length-1)){
+		button10.alpha = 1;
 		button11.alpha = 0;
 	}
 	else{
@@ -104,7 +127,6 @@ function printText(contents){
 
 var tempText;
 function addTempText(contents,duration){
-	console.log("fsdf");
 	tempText = game.add.bitmapText(game.world.centerX, game.world.centerY*(3/4),"pixel",contents,32);
 	tempText.anchor.set(0.5); 
 	tempText.scale.set(0.5);

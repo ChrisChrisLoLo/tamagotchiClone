@@ -10,7 +10,7 @@ function playItem(name,spriteIndex,cost,desc,happinessRestore){
 		console.log("hit");
 		if (this.cost>globalVal.money){
 			console.log("INSUFFICIENT FUNDS");
-			addTempText("INSUFFICIENT FUNDS",2);
+			addTempText("INSUFFICIENT FUNDS",1);
 			//TODO, have text in the screen be displayed for x amount of time
 			return;
 		}

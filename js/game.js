@@ -290,7 +290,6 @@ function ailmentCheck(){
 		sickSprite.alpha = 0;
 	}
 }
-//
 
 game.state.add("preload",preload);
 game.state.add("main",main);
@@ -300,4 +299,7 @@ game.state.add("food",food);
 game.state.add("toilet",toilet);
 game.state.add("medicine",medicine);
 game.state.add("play",play);
+game.state.add("shop",shop);
+game.state.add("shopItem",shopItem);
+game.state.add("shopFood",shopFood);
 game.state.start("preload");
