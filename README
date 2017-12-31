@@ -1,5 +1,15 @@
 Code by Christian Lo
 
+A tamagotchi clone, made with JavaScript and the Phaser game library.
+
 How to run:
 Download/Clone this folder onto your pc, and run via Firefox/Brackets live
 launcher. Does not work for Chrome at this point in time.
+
+Controls:
+Everything uses mouse input, and everybutton that does not repsond has not been implemented yet. Much of the gameplay elements
+clone that of a tamagotchi, and a full guide will be released when a finished state is reached.
+
+File structure:
+"phaser.js" is library used in this project. The "main" file is found in "game.js", the functions that create a 
+skeleton for the game is in "userInterface.js", and all other files correspond to their respective feature.
