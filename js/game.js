@@ -92,15 +92,16 @@ var main = {
 		tickCheck();
 		ailmentCheck();
 		petSprite.play(pet.mood);
+		counter.text = tickCounter;
 		
 		//now calculate pet mood
 		if (pet.mood == "dead"){
 			return;
 		}
-		if((pet.hunger>=70)&&(pet.happyness>=70)){
+		if((pet.hunger>50)&&(pet.happiness>=60)){
 			pet.mood = "happy";
 		}
-		else if((pet.hunger>=30)&&(pet.happyness<30)){
+		else if((pet.hunger>=30)&&(pet.happiness<30)){
 			pet.mood = "angry";
 		}
 		else if(pet.hunger<=0){
@@ -112,7 +113,7 @@ var main = {
 		else{
 			pet.mood = "neutral";
 		}
-		counter.text = tickCounter;
+		
 		
 	}
 }
@@ -235,10 +236,10 @@ function tick(){
 	if (pet.mood == "dead"){
 		return;
 	}
-	if((pet.hunger>=70)&&(pet.happyness>=70)){
+	if((pet.hunger>=70)&&(pet.happiness>=70)){
 		pet.mood = "happy";
 	}
-	else if((pet.hunger>=30)&&(pet.happyness<30)){
+	else if((pet.hunger>=30)&&(pet.happiness<30)){
 		pet.mood = "angry";
 	}
 	else if(pet.hunger<=0){

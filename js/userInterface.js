@@ -18,6 +18,8 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 Object must have mainText,descText,spriteIndex properties and should have a select() method.
 */
 
+//TODO: have a menu that allows you to select and scroll from more than one array.
+//function drawGameMenu()
 
 slideCounter = 0;
 //this function creates the buttons and UI to be displayed to the user.

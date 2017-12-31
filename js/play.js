@@ -1,22 +1,36 @@
-function foodItem(name,spriteIndex,cost,desc,hungRestore){
+rerunCounter = 5;
+function playItem(name,spriteIndex,cost,desc,happinessRestore){
 	this.mainText = name;
 	this.descText = desc;
 	this.spriteIndex = spriteIndex;
 	this.cost = cost;
-	this.hungRestore = hungRestore;
+	this.happinessRestore = happinessRestore;
 	this.select = function() {
-		pet.hunger = pet.hunger+this.hungRestore;
+		rerunCounter+100;
+		console.log("hit");
+		if (this.cost>globalVal.money){
+			console.log("INSUFFICIENT FUNDS");
+			//TODO, have text in the screen be displayed for x amount of time
+			return;
+		}
+		if (this.mainText == "PetFlix"){
+			console.log("hit");
+			rerunCounter++;
+			//update the text in the object
+			this.descText = "Watch reruns of 'The Office',\nfor the "+rerunCounter+"th time.\nCosts $3";
+		}
+		pet.happiness += this.happinessRestore;
 		globalVal.money = globalVal.money-this.cost;
 		game.state.start("main");
 	}
 }
-//
-foodArray = [
-	new foodItem("burger",0,10,"Fast food\nCosts $10",8),
-	new foodItem("steak",1,20,"Cow flesh.\nCosts $20",18),
-	new foodItem("creamsicle",2,5,"I hate creamsicles\nCosts $5",3),
-	new foodItem("fish",3,20,"85% Mercury free!\nCosts $20",20),
-	new foodItem("egg",4,20,"Egg flesh\nCosts $20",20),
+//TODO: allow for new playItems to be stacked onto this array when purchased from the shop
+playArray = [
+	new playItem("Vacation",0,100,"Chill\nCosts $100",100),
+	new playItem("Board Games",1,20,"More like Bored Games amiright\nCosts $1",5),
+	new playItem("Work",2,-50,"Make $$$, but at the expense\n of some happiness.\nPays $50",-10),
+	new playItem("PetFlix",3,3,"Watch reruns of 'The Office',\nfor the "+rerunCounter+"th time.\nCosts $3",5),
+	new foodItem("PRAISE STEVE JOBS",4,999,"APPLE DOES WHAT WINDON'T\nCosts $999",40),
 	new foodItem("coffee",5,20,"Bitter drink\nCosts $20",20),
 	new foodItem("drumstick",6,20,"Bird flesh\nCosts $20",20),
 	new foodItem("shoe",7,150,"You pay for the design\nCosts $150",2),
@@ -31,8 +45,8 @@ var play = {
 	},
 	create: function(){
 		drawGameBody();
-		drawGameUI(foodArray,"foodSheet");
-		
+		drawGameUI(playArray,"foodSheet");
+
 		/*
 		//draw food sprite
 		foodSprite = game.add.sprite(this.game.world.centerX,this.game.world.centerY,"foodSheet");
@@ -47,7 +61,7 @@ var play = {
 		*/
 	},
 	update: function(){
-		displaySlide(foodArray);
+		displaySlide(playArray);
 		tickCheck();	
 	}
 }
