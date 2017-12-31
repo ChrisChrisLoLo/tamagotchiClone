@@ -19,7 +19,13 @@ Object must have mainText,descText,spriteIndex properties and should have a sele
 */
 
 //TODO: have a menu that allows you to select and scroll from more than one array.
-//function drawGameMenu()
+function drawGameMenu(){
+	button13 = game.add.button(width*(5/6) ,height*(2/6),"buttonSheet",changeSlide,this,10,10,10);
+	button13.anchor.set(0.5);
+	button14 = game.add.button(width*(5/6) ,height*(4/6),"buttonSheet",changeSlide,this,10,10,10);
+	button14.anchor.set(0.5);
+	
+}
 
 slideCounter = 0;
 //this function creates the buttons and UI to be displayed to the user.
@@ -47,7 +53,6 @@ function drawGameUI(array,spriteSheet){
 	descText = game.add.bitmapText(game.world.centerX, height*(4/6),"pixel","ERROR",22);
 	descText.anchor.setTo(0.5);
 	descText.align = "center";
-	
 }
 
 //changeSlide() is used to pass through various arrays
@@ -89,13 +94,25 @@ function displaySlide(array){
 	}
 	mainText.text = array[slideCounter].mainText;
 	descText.text = array[slideCounter].descText;
-	
 }
 //-----------------------------------------------------------------------------------------------
 function printText(contents){
 	var text = game.add.bitmapText(75, game.world.centerY-200,"pixel",contents,32);
 	//text.anchor.set(0.5);
 		//
+}
+
+var tempText;
+function addTempText(contents,duration){
+	console.log("fsdf");
+	tempText = game.add.bitmapText(game.world.centerX, game.world.centerY*(3/4),"pixel",contents,32);
+	tempText.anchor.set(0.5); 
+	tempText.scale.set(0.5);
+	tempText.alpha = 1;
+	game.time.events.add(Phaser.Timer.SECOND *duration,removeTempText,this);
+}
+function removeTempText(){
+	tempText.alpha = 0;
 }
 
 

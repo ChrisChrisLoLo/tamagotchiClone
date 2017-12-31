@@ -6,6 +6,7 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 	this.hungRestore = hungRestore;
 	this.select = function() {
 		if (this.cost>globalVal.money){
+			
 			console.log("INSUFFICIENT FUNDS");
 			//TODO, have text in the screen be displayed for x amount of time
 			return;
@@ -36,6 +37,7 @@ var food = {
 	},
 	create: function(){
 		drawGameBody();
+		//drawGameMenu();
 		drawGameUI(foodArray,"foodSheet");
 		
 		/*
