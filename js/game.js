@@ -93,7 +93,25 @@ var main = {
 		ailmentCheck();
 		petSprite.play(pet.mood);
 		
-
+		//now calculate pet mood
+		if (pet.mood == "dead"){
+			return;
+		}
+		if((pet.hunger>=70)&&(pet.happyness>=70)){
+			pet.mood = "happy";
+		}
+		else if((pet.hunger>=30)&&(pet.happyness<30)){
+			pet.mood = "angry";
+		}
+		else if(pet.hunger<=0){
+			pet.mood = "dead";
+		}
+		else if((pet.hunger<30)||(pet.sick)){
+			pet.mood = "sad";
+		}
+		else{
+			pet.mood = "neutral";
+		}
 		counter.text = tickCounter;
 		
 	}
@@ -129,11 +147,11 @@ var stats = {
 		drawGameBody();
 		pet.happiness = Math.min(Math.max(pet.happiness,0),100);
 		pet.hunger = Math.min(Math.max(pet.hunger,0),100);
+		text = game.add.bitmapText(75, game.world.centerY-200,"pixel","ERROR",32);
 	},
 	update: function(){
 		tickCheck();
-		var contents = "Name: " + pet.name + "\nAge:  "+ pet.age+"\nHealth:  "+pet.health + "\nHunger:  "+ pet.hunger+ "\nHappiness: "+pet.happiness+ "\nMoney: $"+globalVal.money;
-		printText(contents);
+		text.text = "Name: " + pet.name + "\nAge:  "+ pet.age+"\nHealth:  "+pet.health + "\nHunger:  "+ pet.hunger+ "\nHappiness: "+pet.happiness+ "\nMoney: $"+globalVal.money;
 	}
 }
 
@@ -162,6 +180,17 @@ var toilet = {
 	}
 }
 
+var medicine = {
+	preload: function(){
+	},
+	create: function(){
+		drawGameBody();
+		pet.sick = false;
+		game.state.start("main");
+	},
+	update: function(){	
+	}
+}
 
 //---------------------------SUBSTATE FUNCTIONS---------------------------------------
 
@@ -191,11 +220,18 @@ function tick(){
 	console.log("tick");
 	pet.hunger = pet.hunger-3;
 	pet.happiness = pet.happiness-2;
-
+	
+	//further decrease stats if pet is sick
+	if(pet.sick){
+		pet.hunger = pet.hunger-5;
+		pet.happiness = pet.happiness-2;
+	}
+	
 	pet.happiness = Math.min(Math.max(pet.happiness,0),100);
 	pet.hunger = Math.min(Math.max(pet.hunger,0),100);
 	
 	//now calculate pet mood
+	/*
 	if (pet.mood == "dead"){
 		return;
 	}
@@ -208,13 +244,13 @@ function tick(){
 	else if(pet.hunger<=0){
 		pet.mood = "dead";
 	}
-	else if((pet.hunger<30)||(pet.happyness<50)){
+	else if((pet.hunger<30)||(pet.sick)){
 		pet.mood = "sad";
 	}
 	else{
 		pet.mood = "neutral";
 	}
-	
+	*/
 	//see if the pet does it's business. goes more frequently if well fed.
 	if(pet.hunger>90){
 		if (Math.random()>0.70){
@@ -227,6 +263,10 @@ function tick(){
 		}
 	}
 	pet.poop = Math.min(Math.max(pet.poop,0),3);
+	//amount of poop alters probability of sickness
+	if(Math.random()<(0.1*pet.poop)){
+		pet.sick = true;
+	}
 	console.log("dung: "+pet.poop);
 }
 
@@ -257,4 +297,6 @@ game.state.add("stats",stats);
 game.state.add("fastForward",fastForward);
 game.state.add("food",food);
 game.state.add("toilet",toilet);
+game.state.add("medicine",medicine);
+game.state.add("play",play);
 game.state.start("preload");

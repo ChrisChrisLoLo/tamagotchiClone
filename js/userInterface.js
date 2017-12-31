@@ -51,7 +51,7 @@ function drawGameUI(array,spriteSheet){
 //changeSlide() is used to pass through various arrays
 //an array must be defined in each state in order to be parsed by this function.
 function changeSlide(button){
-	console.log(button.variable);
+	//console.log(button.variable);
 	switch(button.name){
 		case "backward":
 			slideCounter--;
@@ -118,7 +118,7 @@ function drawGameBody(){
 	button2.anchor.set(0.5);
 		
 	button3 = game.add.button(width*(4/6) ,buttonDispX,"buttonSheet",changeState,this,3,3,3);
-	button3.name = "games";
+	button3.name = "play";
 	button3.anchor.set(0.5);
 		
 	button4 = game.add.button(width*(5/6) ,buttonDispX,"buttonSheet",changeState,this,4,4,4);
