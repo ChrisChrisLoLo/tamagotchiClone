@@ -91,6 +91,8 @@ var main = {
 	update: function(){
 		tickCheck();
 		ailmentCheck();
+		
+		//play sprite animation according to mood
 		petSprite.play(pet.mood);
 		counter.text = tickCounter;
 		

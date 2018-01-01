@@ -17,15 +17,17 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 				globalVal.money = globalVal.money-this.cost;
 				console.log("push");
 				invFoodArray.push(this);
-				game.state.start("main");
+				addTempText("Purchased!",1);
+				//game.state.start("main");
 			break;
 			//Consumes an item
 			case "use":
 				pet.hunger = pet.hunger+this.hungRestore;
 				invFoodArray.splice(invFoodArray.indexOf(this), 1 );
+				game.state.start("main");
 			break;
 		}
-		game.state.start("main");
+		
 	}
 }
 //
@@ -53,6 +55,7 @@ var food = {
 		//if (!invFoodArray){}
 		drawGameBody();
 		drawGameUI(invFoodArray,"foodSheet");
+		descText.alpha = 0;
 		button12.mode="use";
 		
 		if(!invFoodArray.length){

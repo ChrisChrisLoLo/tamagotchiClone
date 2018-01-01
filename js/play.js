@@ -31,11 +31,8 @@ playArray = [
 	new playItem("Board Games",1,20,"More like Bored Games amiright\nCosts $1",5),
 	new playItem("Work",2,-50,"Make $$$, but at the expense\n of some happiness.\nPays $50",-10),
 	new playItem("PetFlix",3,3,"Watch reruns of 'The Office',\nfor the "+rerunCounter+"th time.\nCosts $3",5),
-	new playItem("PRAISE STEVE JOBS",4,999,"APPLE DOES WHAT WINDON'T\nCosts $999",40),
-	new foodItem("coffee",5,20,"Bitter drink\nCosts $20",20),
-	new foodItem("drumstick",6,20,"Bird flesh\nCosts $20",20),
-	new foodItem("shoe",7,150,"You pay for the design\nCosts $150",2),
-	new foodItem("chicken",8,20,"Fresh chicken\nCosts $20",20)
+	new playItem("PRAISE STEVE JOBS",4,999,"APPLE DOES WHAT WINDON'T\nCosts $999",40)
+	
 ];
 
 
