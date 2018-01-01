@@ -15,7 +15,7 @@ var time;
 function pet() {
 	this.name = "BBQ MAN";
 	this.sex = "M";
-	this.age = 33;
+	this.age = 5;
 	this.health = 50;
 	this.happiness = 50;
 	this.hunger = 50;
@@ -130,6 +130,7 @@ var preload = {
 		//loads a sprite sheet and breaks the sheet up into 10, 128 x 128 sprites.
 		this.load.spritesheet("petSheet","assets/art/pet/petSheet.png",128,128,10);
 		this.load.spritesheet("foodSheet","assets/art/items/foodSheet.png",128,128,9);
+		this.load.spritesheet("playSheet","assets/art/items/playSheet.png",128,128,12);
 		this.load.spritesheet("ailmentSheet","assets/art/pet/ailmentSheet.png",128,128,9);
 		//loads button sprite sheet.
 		this.load.spritesheet("buttonSheet","assets/art/buttonSheet.png",64,64,15);
@@ -142,6 +143,8 @@ var preload = {
 		game.state.start("main");
 	}
 }
+//-200+(32*4)
+//var healthBarEmpty;
 
 var stats = {
 	preload: function(){	
@@ -151,10 +154,13 @@ var stats = {
 		pet.happiness = Math.min(Math.max(pet.happiness,0),100);
 		pet.hunger = Math.min(Math.max(pet.hunger,0),100);
 		text = game.add.bitmapText(75, game.world.centerY-200,"pixel","ERROR",32);
+
+		
+		
 	},
 	update: function(){
 		tickCheck();
-		text.text = "Name: " + pet.name + "\nAge:  "+ pet.age+"\nHealth:  "+pet.health + "\nHunger:  "+ pet.hunger+ "\nHappiness: "+pet.happiness+ "\nMoney: $"+globalVal.money;
+		text.text = "Name: " + pet.name + "\nAge:  "+ pet.age + "\nHunger: "+ pet.hunger+"\nHappiness: "+pet.happiness+ "\nMoney: $"+globalVal.money;
 	}
 }
 
@@ -233,28 +239,6 @@ function tick(){
 	pet.happiness = Math.min(Math.max(pet.happiness,0),100);
 	pet.hunger = Math.min(Math.max(pet.hunger,0),100);
 	
-	//now calculate pet mood
-	/*
-	if (pet.mood == "dead"){
-		return;
-	}
-	if((pet.hunger>=70)&&(pet.happiness>=70)){
-		pet.mood = "happy";
-	}
-	else if((pet.hunger>=30)&&(pet.happiness<30)){
-		pet.mood = "angry";
-	}
-	else if(pet.hunger<=0){
-		pet.mood = "dead";
-	}
-	else if((pet.hunger<30)||(pet.sick)){
-		pet.mood = "sad";
-	}
-	else{
-		pet.mood = "neutral";
-	}
-	*/
-	//see if the pet does it's business. goes more frequently if well fed.
 	if(pet.hunger>90){
 		if (Math.random()>0.70){
 			pet.poop++;

@@ -69,6 +69,8 @@ function drawGameUI(array,spriteSheet){
 	descText.anchor.setTo(0.5);
 	descText.align = "center";
 	descText.align = "center";
+	costText = game.add.bitmapText(game.world.centerX, height*(4/6)+44,"pixel","ERROR",22);
+	costText.anchor.setTo(0.5);
 }
 
 //changeSlide() is used to pass through various arrays
@@ -117,6 +119,7 @@ function displaySlide(array){
 	}
 	mainText.text = array[slideCounter].mainText;
 	descText.text = array[slideCounter].descText;
+	costText.text = "Costs: $"+array[slideCounter].cost;
 }
 //-----------------------------------------------------------------------------------------------
 function printText(contents){

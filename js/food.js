@@ -32,7 +32,7 @@ function foodItem(name,spriteIndex,cost,desc,hungRestore){
 }
 //
 invFoodArray = [
-	new foodItem("Burger",0,10,"Fast food\nCosts $10",8),
+	new foodItem("Burger",0,10,"Fast food",8),
 	/*
 	new foodItem("Steak",1,20,"Cow flesh.\nCosts $20",18),
 	new foodItem("Creamsicle",2,5,"I hate creamsicles\nCosts $5",3),
@@ -55,7 +55,7 @@ var food = {
 		//if (!invFoodArray){}
 		drawGameBody();
 		drawGameUI(invFoodArray,"foodSheet");
-		descText.alpha = 0;
+		costText.alpha = 0;
 		button12.mode="use";
 		
 		if(!invFoodArray.length){
