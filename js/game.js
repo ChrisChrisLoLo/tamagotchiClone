@@ -3,33 +3,32 @@ var height = 800;
 var width = 800;
 var buttonDispX = 50;
 
-pet = new pet();
+
 date = new Date();
-globalVal = new globalVal();
+
 
 
 var tickCounter = 0 ;
 
 var time;
 
-function pet() {
-	this.name = "BBQ MAN";
-	this.sex = "M";
-	this.age = 5;
-	this.health = 50;
-	this.happiness = 50;
-	this.hunger = 50;
-	this.mood = "Neutral";
-	this.size = 60;
-	this.sick = false;
-	this.poop = 0;
+var pet = {
+	name : "BBQ MAN",
+	sex : "M",
+	age : 5,
+	health : 50,
+	happiness : 50,
+	hunger : 50,
+	mood : "Neutral",
+	size : 60,
+	sick : false,
+	poop : 0
 	//poop refers to legitimate fecal matter the pet makes. It is not immaturity on my side.
-}
+};
 
-function globalVal(){
-	this.money = 500;
-	
-}
+var globalVal ={
+	money : 500
+};
 //---------------------------STATES---------------------------------------
 var main = {
 	preload: function(){
@@ -140,6 +139,7 @@ var preload = {
 		
 	},
 	create: function(){
+		loadStorage();
 		game.state.start("main");
 	}
 }
@@ -288,4 +288,5 @@ game.state.add("play",play);
 game.state.add("shop",shop);
 game.state.add("shopItem",shopItem);
 game.state.add("shopFood",shopFood);
+game.state.add("save",save);
 game.state.start("preload");

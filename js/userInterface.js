@@ -170,7 +170,7 @@ function drawGameBody(){
 	button4.anchor.set(0.5);
 		
 	button5 = game.add.button(width*(1/6) ,height-buttonDispX,"buttonSheet",changeState,this,5,5,5);
-	button5.name = "discipline";
+	button5.name = "save";
 	button5.anchor.set(0.5);
 	
 	button6 = game.add.button(width*(2/6) ,height-buttonDispX,"buttonSheet",changeState,this,6,6,6);
