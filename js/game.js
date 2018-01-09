@@ -15,7 +15,7 @@ var time;
 var pet = {
 	name : "BBQ MAN",
 	sex : "M",
-	age : 5,
+	age : 0,
 	health : 50,
 	happiness : 50,
 	hunger : 50,
@@ -130,6 +130,7 @@ var preload = {
 		this.load.spritesheet("petSheet","assets/art/pet/petSheet.png",128,128,10);
 		this.load.spritesheet("foodSheet","assets/art/items/foodSheet.png",128,128,9);
 		this.load.spritesheet("playSheet","assets/art/items/playSheet.png",128,128,12);
+		this.load.spritesheet("saveSheet","assets/art/items/saveSheet.png",128,128,3);
 		this.load.spritesheet("ailmentSheet","assets/art/pet/ailmentSheet.png",128,128,9);
 		//loads button sprite sheet.
 		this.load.spritesheet("buttonSheet","assets/art/buttonSheet.png",64,64,15);
@@ -204,7 +205,7 @@ var medicine = {
 //---------------------------SUBSTATE FUNCTIONS---------------------------------------
 
 //time per tick, in minutes
-var TIME_PER_TICK = 1;
+var TIME_PER_TICK = 5;
 var timeBegin = 0;
 
 //This function checks if the "real world clock" has advanced enough to increment the game a tick.
@@ -253,6 +254,10 @@ function tick(){
 	//amount of poop alters probability of sickness
 	if(Math.random()<(0.1*pet.poop)){
 		pet.sick = true;
+	}
+	
+	if (pet.mood != "dead"){
+		pet.age++;
 	}
 	console.log("dung: "+pet.poop);
 }

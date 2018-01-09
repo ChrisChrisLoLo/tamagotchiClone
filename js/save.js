@@ -10,7 +10,7 @@ function loadStorage(){
 		pet = {
 			name : "BBQ MAN",
 			sex : "M",
-			age : 5,
+			age : 0,
 			health : 50,
 			happiness : 50,
 			hunger : 50,
@@ -39,7 +39,7 @@ function resetStorage(){
 	pet = {
 			name : "BBQ MAN",
 			sex : "M",
-			age : 5,
+			age : 0,
 			health : 50,
 			happiness : 50,
 			hunger : 50,
@@ -75,8 +75,8 @@ function saveItem(name,spriteIndex,desc){
 //
 saveArray = [
 	new saveItem("Save",0,"Save your game"),
-	new saveItem("Load",0,"Load your game"),
-	new saveItem("Reset",0,"Reset your game,\nand lose all your progress")
+	new saveItem("Load",1,"Load your game"),
+	new saveItem("Reset",2,"Reset your game,\nand lose all your progress")
 ];
 
 var save = {
@@ -85,7 +85,7 @@ var save = {
 	},
 	create: function(){
 		drawGameBody();
-		drawGameUI(saveArray,"foodSheet");
+		drawGameUI(saveArray,"saveSheet");
 		costText.alpha = 0;
 		button12.mode="use";
 		
