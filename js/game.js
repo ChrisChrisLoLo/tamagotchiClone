@@ -125,6 +125,7 @@ var preload = {
 	},
 	create: function(){
 		loadStorage();
+        resetStorage();
 		game.state.start("main");
 	}
 }

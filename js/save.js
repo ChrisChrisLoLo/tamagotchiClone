@@ -43,7 +43,7 @@ function loadJSON(key){
     if (testJSON == null){
         addTempText("Cannot Load File!");
         console.log("ERROR!");
-        return;
+        return false;
     }
     else{
         console.log("hit");
@@ -54,8 +54,11 @@ function loadJSON(key){
 function loadStorage(){
 	//loaded object is string (only strings can be stored), so we take the string
 	//and "parse" it back into an object.
-    pet = loadJSON("petSave");
-    globalVal = loadJSON("globalValSave");
+    if(loadJSON("petSave")){
+        pet = loadJSON("petSave");
+        globalVal = loadJSON("globalValSave");
+    }
+
 
     /*
 	var petJSON = localStorage.getItem("petSave");
