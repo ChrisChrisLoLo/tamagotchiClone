@@ -1,81 +1,30 @@
-var pet = {
-	name : "BBQ MAN",
-	sex : "M",
-	age : 0,
-	health : 50,
-	happiness : 50,
-	hunger : 50,
-	mood : "Neutral",
-	size : 60,
-	sick : false,
-	poop : 0
-	//poop refers to legitimate fecal matter the pet makes. It is not immaturity on my side.
-};
-
-var globalVal ={
-	money : 500
-};
-
-var defaultPet={
-    name : "BBQ MAN",
-	sex : "M",
-	age : 0,
-	health : 50,
-	happiness : 50,
-	hunger : 50,
-	mood : "Neutral",
-	size : 60,
-	sick : false,
-	poop : 0,
-};
-var defaultPetJSON = JSON.stringify(defaultPet);
-
-var defaultGlobalVal={
-    money : 500
-};
-var defaultGlobalValJSON = JSON.stringify(defaultGlobalVal);
-//
-//Attempt to load JSON with key string, and assign that to assignToVar, if cannot load JSON load abort.
-function loadJSON(key){
-    var loadedJSON = localStorage.getItem(key);
-    var testJSON = JSON.parse(loadedJSON);
-    console.log(JSON.parse(loadedJSON));
-    if (testJSON == null){
-        addTempText("Cannot Load File!");
-        console.log("ERROR!");
-        return;
-    }
-    else{
-        console.log("hit");
-        return testJSON;
-    }
-}
-
 function loadStorage(){
 	//loaded object is string (only strings can be stored), so we take the string
 	//and "parse" it back into an object.
-    pet = loadJSON("petSave");
-    globalVal = loadJSON("globalValSave");
-
-    /*
 	var petJSON = localStorage.getItem("petSave");
 	pet = JSON.parse(petJSON);
 	var globalValJSON = localStorage.getItem("globalValSave");
 	globalVal = JSON.parse(globalValJSON);
-	var invFoodArrayJSON
-    var invPlayArrayJSON
-    var playArrayJSON
-    
-    
-    
-    
+	
 	if (pet == null){
-		pet = default_pet;
+		pet = {
+			name : "BBQ MAN",
+			sex : "M",
+			age : 0,
+			health : 50,
+			happiness : 50,
+			hunger : 50,
+			mood : "Neutral",
+			size : 60,
+			sick : false,
+			poop : 0,
+		};
 	}
 	if (globalVal == null){
-		globalVal = default_globalVal;
+		globalVal = {
+		money : 500
+		};
 	}
-    */
 }
 
 function saveStorage(){
@@ -85,12 +34,23 @@ function saveStorage(){
 }
 
 function resetStorage(){
-    
-    pet = JSON.parse(defaultPetJSON);
-    globalVal = JSON.parse(defaultGlobalValJSON);
-    
 	localStorage.removeItem("petSave");
 	localStorage.removeItem("globalValSave");
+	pet = {
+			name : "BBQ MAN",
+			sex : "M",
+			age : 0,
+			health : 50,
+			happiness : 50,
+			hunger : 50,
+			mood : "Neutral",
+			size : 60,
+			sick : false,
+			poop : 0,
+	};
+	globalVal ={
+		money : 500
+	};
 }
 
 function saveItem(name,spriteIndex,desc){
@@ -118,7 +78,7 @@ saveArray = [
 	new saveItem("Load",1,"Load your game"),
 	new saveItem("Reset",2,"Reset your game,\nand lose all your progress")
 ];
-//
+
 var save = {
 	preload: function(){
 		

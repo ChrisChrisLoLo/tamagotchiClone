@@ -12,23 +12,7 @@ var tickCounter = 0 ;
 
 var time;
 
-var pet = {
-	name : "BBQ MAN",
-	sex : "M",
-	age : 0,
-	health : 50,
-	happiness : 50,
-	hunger : 50,
-	mood : "Neutral",
-	size : 60,
-	sick : false,
-	poop : 0
-	//poop refers to legitimate fecal matter the pet makes. It is not immaturity on my side.
-};
 
-var globalVal ={
-	money : 500
-};
 //---------------------------STATES---------------------------------------
 var main = {
 	preload: function(){
@@ -264,7 +248,6 @@ function tick(){
 
 //turn ailment sprites "on" or "off" depending on the pets properties
 function ailmentCheck(){
-	
 	for (var i=0; i<3; i++){
 		//console.log(poopArray[i]);
 		if (i<pet.poop){
