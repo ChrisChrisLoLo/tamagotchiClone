@@ -1,95 +1,54 @@
-function loadStorage(){
-	//loaded object is string (only strings can be stored), so we take the string
-	//and "parse" it back into an object.
-	var petJSON = localStorage.getItem("petSave");
-	pet = JSON.parse(petJSON);
-	var globalValJSON = localStorage.getItem("globalValSave");
-	globalVal = JSON.parse(globalValJSON);
-	
-	if (pet == null){
-		pet = {
-			name : "BBQ MAN",
-			sex : "M",
-			age : 0,
-			health : 50,
-			happiness : 50,
-			hunger : 50,
-			mood : "Neutral",
-			size : 60,
-			sick : false,
-			poop : 0,
-		};
-	}
-	if (globalVal == null){
-		globalVal = {
-		money : 500
-		};
-	}
-}
-
-function saveStorage(){
-	//convert our object into a sting and store it to the browser.
-	localStorage.setItem("petSave", JSON.stringify(pet));
-	localStorage.setItem("globalValSave",JSON.stringify(globalVal));
-}
-
-function resetStorage(){
-	localStorage.removeItem("petSave");
-	localStorage.removeItem("globalValSave");
-	pet = {
-			name : "BBQ MAN",
-			sex : "M",
-			age : 0,
-			health : 50,
-			happiness : 50,
-			hunger : 50,
-			mood : "Neutral",
-			size : 60,
-			sick : false,
-			poop : 0,
-	};
-	globalVal ={
-		money : 500
-	};
-}
-
-function saveItem(name,spriteIndex,desc){
+function settingItem(name,spriteIndex,desc,affectingVal,nameVal){
 	this.mainText = name;
 	this.descText = desc;
 	this.spriteIndex = spriteIndex;
+	this.nameVal = nameVal;
 	this.select = function(){
-		switch(this.mainText){
-			case "Save":
-				saveStorage();
+		affectingVal = !affectingVal;
+		if (affectingVal){
+			addTempText("Enabled!",0.7);
+		}
+		else{
+			addTempText("Disabled!",0.7);
+		}
+		switch(this.nameVal){
+			case "counterEnabled":
+				globalVal.counterEnabled = affectingVal;
 				break;
-			case "Load":
-				loadStorage();
+			case "godMode":
+				globalVal.godMode = affectingVal;
 				break;
-			case "Reset":
-				resetStorage();
+			case "ezMoney":
+				globalVal.ezMoney = affectingVal;
+				break;
+			case "noToilet":
+				globalVal.noToilet = affectingVal;
+				break;
+			case "camoNinjas":
+				globalVal.camoNinjas = affectingVal;
 				break;
 		}
-		game.state.start("main");
 	}
 }
-//
-saveArray = [
-	new saveItem("Save",0,"Save your game"),
-	new saveItem("Load",1,"Load your game"),
-	new saveItem("Reset",2,"Reset your game,\nand lose all your progress")
+settingArray = [
+	new settingItem("Enable/Disable Counter",0,"Enable tick counter\n& ruin fun",globalVal.counterEnabled,"counterEnabled"),
+	new settingItem("Enable/Disable God Mode",0,"Pet cannot die",globalVal.godMode,"godMode"),
+	new settingItem('"Invest" in Crypto',0,"Get $10 every now and then",globalVal.ezMoney,"ezMoney"),
+	new settingItem("Enable/Disable\nFast Food",0,"Pet doesn't poop",globalVal.noToilet,"noToilet"),
+	new settingItem("Enable/Disable\nCamo Ninjas",0,"Camoflauge Ninjas\n sometimes appear",globalVal.camoNinjas,"camoNinjas"),
 ];
 
-var save = {
+var settings = {
 	preload: function(){
 		
 	},
 	create: function(){
 		drawGameBody();
-		drawGameUI(saveArray,"saveSheet");
+		drawGameUI(settingArray,"saveSheet");
 		costText.alpha = 0;
-		button12.mode="use";
+		//button12.mode="use";
 		
-		if(!saveArray.length){
+		if(!settingArray.length){
 		button12.alpha = 0;
 		button11.alpha = 0;
 		button10.alpha = 0;
@@ -99,7 +58,7 @@ var save = {
 	},
 	update: function(){
 		
-		displaySlide(saveArray);
+		displaySlide(settingArray);
 		
 		tickCheck();	
 	}

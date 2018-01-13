@@ -96,7 +96,7 @@ var main = {
 		else if((pet.hunger>=30)&&(pet.happiness<30)){
 			pet.mood = "angry";
 		}
-		else if(pet.hunger<=0){
+		else if((pet.hunger<=0)&&(!globalVal.godMode)){
 			pet.mood = "dead";
 		}
 		else if((pet.hunger<30)||(pet.sick)){
@@ -132,7 +132,7 @@ var preload = {
 	},
 	create: function(){
 		loadStorage();
-        resetStorage();
+        //resetStorage();
 		game.state.start("main");
 	}
 }
@@ -218,6 +218,10 @@ function tickCheck(){
 }
 
 function tick(){
+	console.log(globalVal.ezMoney);
+	if(globalVal.ezMoney){
+		globalVal.money += 10;
+	}
 	tickCounter++;
 	console.log("tick");
 	pet.hunger = pet.hunger-3;
@@ -228,11 +232,14 @@ function tick(){
 		pet.hunger = pet.hunger-5;
 		pet.happiness = pet.happiness-2;
 	}
-	
 	pet.happiness = Math.min(Math.max(pet.happiness,0),100);
 	pet.hunger = Math.min(Math.max(pet.hunger,0),100);
 	
-	if(pet.hunger>90){
+	//pet has a chance of pooping every tick
+	if(globalVal.noToilet){
+		//do nothing
+	}
+	else if(pet.hunger>90){
 		if (Math.random()>0.70){
 			pet.poop++;
 		} 
@@ -285,4 +292,5 @@ game.state.add("shop",shop);
 game.state.add("shopItem",shopItem);
 game.state.add("shopFood",shopFood);
 game.state.add("save",save);
+game.state.add("settings",settings);
 game.state.start("preload");

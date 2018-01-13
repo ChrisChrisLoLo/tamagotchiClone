@@ -12,31 +12,21 @@ var pet = {
 	//poop refers to legitimate fecal matter the pet makes. It is not immaturity on my side.
 };
 
-var globalVal ={
+globalVal ={
 	money : 500,
-    counterEnabled: true,
-    
-};
-/* MIGHT NOT BE NEEDED
-var defaultPet={
-    name : "BBQ MAN",
-	sex : "M",
-	age : 0,
-	health : 50,
-	happiness : 50,
-	hunger : 50,
-	mood : "Neutral",
-	size : 60,
-	sick : false,
-	poop : 0,
+    counterEnabled: false,
+	godMode: false,
+	ezMoney: false,
+	noToilet: false,
+	camoNinjas: false,
 };
 
-var defaultGlobalVal={
-    money : 500
-};
-*/
 var defaultPetJSON = JSON.stringify(pet);
 var defaultGlobalValJSON = JSON.stringify(globalVal);
+//var defaultInvFoodArrayJSON = JSON.stringify(invFoodArray);
+//var defaultInvPlayArrayJSON = JSON.stringify(invPlayArray);
+//var defaultPlayArrayJSON = JSON.stringify(playArray);
+
 
 //Attempt to load JSON with key string, and assign that to assignToVar, if cannot load JSON load abort and return false.
 function loadJSON(key){
@@ -60,6 +50,8 @@ function loadStorage(){
     if(loadJSON("petSave")){
         pet = loadJSON("petSave");
         globalVal = loadJSON("globalValSave");
+		
+		
     }
 }
 
@@ -67,13 +59,16 @@ function saveStorage(){
 	//convert our object into a sting and store it to the browser.
 	localStorage.setItem("petSave", JSON.stringify(pet));
     localStorage.setItem("globalValSave",JSON.stringify(globalVal));
+	/*
+	localStorage.setItem("invFoodArraySave",JSON.stringify(invFoodArray));
+	localStorage.setItem("playArraySave",JSON.stringify(playArray));
+	localStorage.setItem("invPlayArraySave",JSON.stringify(invPlayArray));
+	*/
 }
 
 function resetStorage(){
-    
     pet = JSON.parse(defaultPetJSON);
     globalVal = JSON.parse(defaultGlobalValJSON);
-    
 	localStorage.removeItem("petSave");
 	localStorage.removeItem("globalValSave");
 }

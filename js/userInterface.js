@@ -134,7 +134,7 @@ function addTempText(contents,duration){
 	tempText.anchor.set(0.5); 
 	tempText.scale.set(0.5);
 	tempText.alpha = 1;
-	game.time.events.add(Phaser.Timer.SECOND *duration,removeTempText,this);
+	game.time.events.add(Phaser.Timer.SECOND*duration,removeTempText,this);
 }
 function removeTempText(){
 	tempText.alpha = 0;
@@ -182,7 +182,7 @@ function drawGameBody(){
 	button7.anchor.set(0.5);	
 	
 	button8 = game.add.button(width*(4/6) ,height-buttonDispX,"buttonSheet",changeState,this,8,8,8);
-	button8.name = "attention";
+	button8.name = "settings";
 	button8.anchor.set(0.5);	
 	
 	button9 = game.add.button(width*(5/6) ,height-buttonDispX,"buttonSheet",changeState,this,9,9,9);
