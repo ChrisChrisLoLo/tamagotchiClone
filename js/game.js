@@ -77,7 +77,14 @@ var main = {
 		
 		//play sprite animation according to mood
 		petSprite.play(pet.mood);
-		counter.text = tickCounter;
+        
+        if(globalVal.counterEnabled){
+            counter.text = tickCounter;
+        }
+        else{
+            counter.text = "";
+        }
+		
 		
 		//now calculate pet mood
 		if (pet.mood == "dead"){

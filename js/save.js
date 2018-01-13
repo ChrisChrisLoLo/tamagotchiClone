@@ -13,9 +13,11 @@ var pet = {
 };
 
 var globalVal ={
-	money : 500
+	money : 500,
+    counterEnabled: true,
+    
 };
-
+/* MIGHT NOT BE NEEDED
 var defaultPet={
     name : "BBQ MAN",
 	sex : "M",
@@ -28,21 +30,22 @@ var defaultPet={
 	sick : false,
 	poop : 0,
 };
-var defaultPetJSON = JSON.stringify(defaultPet);
 
 var defaultGlobalVal={
     money : 500
 };
-var defaultGlobalValJSON = JSON.stringify(defaultGlobalVal);
-//
-//Attempt to load JSON with key string, and assign that to assignToVar, if cannot load JSON load abort.
+*/
+var defaultPetJSON = JSON.stringify(pet);
+var defaultGlobalValJSON = JSON.stringify(globalVal);
+
+//Attempt to load JSON with key string, and assign that to assignToVar, if cannot load JSON load abort and return false.
 function loadJSON(key){
     var loadedJSON = localStorage.getItem(key);
     var testJSON = JSON.parse(loadedJSON);
     console.log(JSON.parse(loadedJSON));
     if (testJSON == null){
         addTempText("Cannot Load File!");
-        console.log("ERROR!");
+        console.log("ERROR! Cannot load save!");
         return false;
     }
     else{
@@ -58,33 +61,12 @@ function loadStorage(){
         pet = loadJSON("petSave");
         globalVal = loadJSON("globalValSave");
     }
-
-
-    /*
-	var petJSON = localStorage.getItem("petSave");
-	pet = JSON.parse(petJSON);
-	var globalValJSON = localStorage.getItem("globalValSave");
-	globalVal = JSON.parse(globalValJSON);
-	var invFoodArrayJSON
-    var invPlayArrayJSON
-    var playArrayJSON
-    
-    
-    
-    
-	if (pet == null){
-		pet = default_pet;
-	}
-	if (globalVal == null){
-		globalVal = default_globalVal;
-	}
-    */
 }
 
 function saveStorage(){
 	//convert our object into a sting and store it to the browser.
 	localStorage.setItem("petSave", JSON.stringify(pet));
-	localStorage.setItem("globalValSave",JSON.stringify(globalVal));
+    localStorage.setItem("globalValSave",JSON.stringify(globalVal));
 }
 
 function resetStorage(){
@@ -124,7 +106,6 @@ saveArray = [
 //
 var save = {
 	preload: function(){
-		
 	},
 	create: function(){
 		drawGameBody();
@@ -138,12 +119,9 @@ var save = {
 		button10.alpha = 0;
 		sprite.alpha = 0;
 		}
-	
 	},
 	update: function(){
-		
 		displaySlide(saveArray);
-		
 		tickCheck();	
 	}
 }
