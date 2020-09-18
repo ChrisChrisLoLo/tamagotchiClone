@@ -5,7 +5,7 @@
 #### A tamagotchi clone, made with JavaScript and the Phaser game library.
 
 ## How to run:
-Assuming they haven't killed this link, check it out here: http://coolgamelamename.bitballoon.com/
+Assuming they haven't killed this link, check it out here: hungry-wing-82501e.netlify.app/
 Alternatively:
 Download/Clone this folder onto your pc, and run via Firefox/Brackets live
 launcher. Does not work for Chrome at this point in time.
